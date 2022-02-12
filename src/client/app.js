@@ -22,6 +22,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+app.use('/stylesheets/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
+app.use('/javascripts/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/js'))
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
