@@ -43,22 +43,16 @@ def makeUser():
 
         status, data = userSearch(uid)
 
+        qrB64 = IDtoQR(uid)
+
         output = {
             "status" : status,
-            "info" : data
+            "info" : data,
+            "qrb64" : qrB64
         }
 
         return output
 
-
-@app.route('/user/code', methods=['GET', 'POST'])
-def makeUser():
-    if request.method == 'POST':
-        uid = request.form["id"]
-
-        qrB64 = IDtoQR(uid)
-
-        return qrB64
 
 @app.route('/validator/code', methods=['GET', 'POST'])
 def makeUser():
