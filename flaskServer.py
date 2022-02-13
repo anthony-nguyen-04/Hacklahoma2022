@@ -28,7 +28,7 @@ def makeUser():
                                    request.form['vaccine-one-date'],
                                    request.form['vaccine-two-type'], request.form['vaccine-two-date'],
                                    request.form['vaccine-three-type'],
-                                   request.form['vaccine-three-date'], card, ouid, request.form['username'])
+                                   request.form['vaccine-three-date'], card, ouid)
 
         results = uid
         return results

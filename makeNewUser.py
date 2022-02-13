@@ -8,7 +8,7 @@ import numpy as np
 from pictureScanner import scanImage
 
 def makeNewUser(name, monthDOB, dayDOB, yearDOB, email, phone, dose1name, dose1date, dose2name, dose2date,
-                dose3name, dose3date, card, id, username):
+                dose3name, dose3date, card, id):
     hiddenToken = secrets.token_hex(32)
     print(hiddenToken)
 
@@ -22,8 +22,7 @@ def makeNewUser(name, monthDOB, dayDOB, yearDOB, email, phone, dose1name, dose1d
         "vaccine-two-type": dose2name,
         "vaccine-two-date": dose2date,
         "vaccine-three-type": dose3name,
-        "vaccine-three-date": dose3date,
-        "username" : username
+        "vaccine-three-date": dose3date
     }
 
     userDict = {
