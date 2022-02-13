@@ -10,22 +10,23 @@ def makeUser():
     if request.method == 'POST':
 
         card = request.files['vaccine-card']
+        print(card)
         card = base64.b64encode(card.read())
         card = card.decode('utf-8')
 
-        id = request.files['ou-id']
-        id = base64.b64encoide(id.read())
-        id = id.decode('utf-8')
+        ouid = request.files['ou-id']
+        ouid = base64.b64encode(ouid.read())
+        ouid = ouid.decode('utf-8')
 
-        id, username = makeNewUser(request.form['name'], request.form['month'], request.form['day'],
+        uid, username = makeNewUser(request.form['name'], request.form['month'], request.form['day'],
                                    request.form['year'],
                                    request.form['email'], request.form['phone'], request.form['vaccine-one-type'],
                                    request.form['vaccine-one-date'],
                                    request.form['vaccine-two-type'], request.form['vaccine-two-date'],
                                    request.form['vaccine-three-type'],
-                                   request.form['vaccine-three-date'], card, id, request.form['username'])
+                                   request.form['vaccine-three-date'], card, ouid, request.form['username'])
 
-        results = {"id" : id, "username" : username}
+        results = {"id" : uid, "username" : username}
         return results
 
 
