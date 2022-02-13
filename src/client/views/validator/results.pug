@@ -1,0 +1,23 @@
+extends ../layout
+
+block content 
+    div(style='max-width: 500px;').container-md.mx-auto.d-block
+        if status === 'boosted'
+            .card.text-white.bg-success.mb-3 
+                .card-body 
+                    h1.text-center BOOSTED 
+        if status === 'full'
+            .card.text-white.bg-success.mb-3 
+                .card-body 
+                    h1.text-center FULLY VACCINATED
+        if status === 'partial'
+            .card.bg-warning.mb-3 
+                .card-body 
+                    h1.text-center PARTIALLY VACCINATED 
+        if status === 'none'
+            .card.text-white.bg-danger.mb-3 
+                .card-body 
+                    h1.text-center NOT VACCINATED
+        h2.text-center= name 
+        h3.text-center= 'DOB: ' + dob
+        a(href='/validator').btn.btn-primary.mx-auto.d-block.mt-5 Return to scanner

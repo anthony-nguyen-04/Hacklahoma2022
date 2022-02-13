@@ -1,4 +1,4 @@
-extends layout 
+extends ../layout 
 
 block content 
     img(src='/images/banner-logo.png').img-fluid
@@ -13,7 +13,7 @@ block content
             li A valid email 
             li A US phone number 
         p After you submit this form, Goklahoma will verify the information you provided matches that on your vaccine card. Once this verification process is complete, you will be notified via text message that your Goklahoma vaccine pass is ready.
-        form(action='http://localhost:5000/user/new', method='post')
+        form(action='/pass/new/callback', method='post', enctype='multipart/form-data')
             .mb-3 
                 label(for='name').form-label Your name 
                 input(type='text', name='name', placeholder='Jane Doe')#name.form-control
@@ -101,5 +101,4 @@ block content
             .mb-3 
                 label(for='ou-id') Picture of your OU ID card 
                 input(type='file', name='ou-id').form-control#ou-id
-            input(type='text', name='username', value=user.name).d-none
             input(type='submit', value='Submit form').btn.btn-outline-success

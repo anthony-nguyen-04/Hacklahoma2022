@@ -1,0 +1,7 @@
+extends ../layout
+
+block content 
+    h1 Submissions awaiting review 
+    ul.list-group 
+        each id in pending
+            a(href='/admin/verify/' + id).list-group-item.list-group-item-action #{id}

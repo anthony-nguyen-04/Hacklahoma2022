@@ -1,0 +1,25 @@
+extends ../layout
+
+block content 
+    h1 Verify information accuracy
+    .container 
+        row.row-cols-2 
+            .vaccine-card 
+                img(src=vaccineCard).img-fluid
+            .id-card 
+                img(src=idCard)
+            .info 
+                ul.list-group 
+                    li.list-group-item Name: #{info.name}
+                    li.list-group-item DOB: #{info.dob}
+                    li.list-group-item Dose 1 Type: #{info['vaccine-one-type']}
+                    li.list-group-item Dose 1 Date: #{info['vaccine-one-date']}
+                    li.list-group-item Dose 2 Type: #{info['vaccine-two-type']}
+                    li.list-group-item Dose 2 Date: #{info['vaccine-two-date']}
+                    li.list-group-item Dose 3 Type: #{info['vaccine-three-type']}
+                    li.list-group-item Dose 3 Date: #{info['vaccine-three-date']}
+            .options 
+                .list-group 
+                    a(href='/admin/verify/success/' + id).list-group-item.list-group-item-action.text-success Valid
+                    a(href='/admin/verify/failure/' + id).list-group-item.list-group-item-action.text-danger Invalid
+
