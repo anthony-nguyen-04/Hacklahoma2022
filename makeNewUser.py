@@ -108,6 +108,6 @@ def makeNewUser(name, monthDOB, dayDOB, yearDOB, email, phone, dose1name, dose1d
 #print(idTest)
 
 #token, name = makeNewUser("Anthony Nguyen", 11, 18, 2004, "anthonynguyenlaas@gmail.com", "5802917814", "Pfizer", "03/19/2021",
-                          "Pfizer", "04/09/2021", "N/A", "N/A", "anthonynguyenlaas@gmail.com", cardTest, idTest)
+#                          "Pfizer", "04/09/2021", "N/A", "N/A", "anthonynguyenlaas@gmail.com", cardTest, idTest)
 
 #print(token)
