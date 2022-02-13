@@ -4,9 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
+var validatorRouter = require('./routes/validator');
 var usersRouter = require('./routes/users');
-var authRouter = require('./routes/auth');
+var adminRouter = require('./routes/admin');
+
+var userController = require('./users/users');
 
 var app = express();
 
@@ -20,9 +22,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//app.use('/', indexRouter);
-//app.use('/users', usersRouter);
-//app.use('/auth', authRouter);
+app.use('/pass', usersRouter);
+app.use('/validator', validatorRouter);
+app.use('/admin', adminRouter);
+
 const { auth } = require('express-openid-connect');
 
 const config = {
@@ -40,12 +43,28 @@ app.use(auth(config));
 // give the user object to the views
 app.use(function (req, res, next) {
     res.locals.user = req.oidc.user;
+    if (req.oidc.isAuthenticated()) {
+        if (!(userController.userExists(res.locals.user.name))) {
+            userController.addUser(res.locals.user.name);
+        }
+        const localUser = userController.getUser(res.locals.user.name);
+        if ('info' in localUser) {
+            res.locals.user.info = localUser.info
+        } else {
+            localUser.info = {
+                permissions: ['user'],
+                hasPass: false
+            };
+            userController.setUser(localUser)
+        }
+    }
     next();
 })
 
 // req.isAuthenticated is provided from the auth router
 app.get('/', (req, res) => {
-    res.send(JSON.stringify(req.oidc.user));
+    if (req.oidc.isAuthenticated()) return res.render('index');
+    res.render('login');
 });
 
 app.use('/stylesheets/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
