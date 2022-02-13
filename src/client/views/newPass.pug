@@ -13,7 +13,7 @@ block content
             li A valid email 
             li A US phone number 
         p After you submit this form, Goklahoma will verify the information you provided matches that on your vaccine card. Once this verification process is complete, you will be notified via text message that your Goklahoma vaccine pass is ready.
-        form(action='/api/user/info', method='post')
+        form(action='http://localhost:5000/user/new', method='post')
             .mb-3 
                 label(for='name').form-label Your name 
                 input(type='text', name='name', placeholder='Jane Doe')#name.form-control

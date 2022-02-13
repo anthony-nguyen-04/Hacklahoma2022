@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+    div(style='max-width: 500px;').container-md.mx-auto.d-block
+        .row.mb-3
+            h1 Scan passes
+        .row.text-center.justify-content-center
+            .camera.d-inline-block
+                video#video.rounded
+            button(style='max-width: 200px;').btn.btn-outline-primary.my-3#takephoto Take photo 
+            canvas#canvas.d-none
+        .row.text-center.mb-3
+            .output.d-inline-block
+                img#photo
+        .row.justify-content-center
+            form(action='/validator/submit', method='post').text-center
+                input(name='data', type='text', value='')#data.d-none
+                input(type='submit', value='Submit image').btn.btn-outline-primary
+    script(src='javascripts/scan.js')
