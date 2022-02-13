@@ -103,10 +103,12 @@ def scanImage(pictureName):
 		cv2.imshow("Scanned", imutils.resize(warped, height = 650))
 		cv2.waitKey(0)
 
+		return warped
+
 	except UnboundLocalError:
 		print("unable to scan properly. please try again")
 
-scanImage("id.jpg")
-scanImage("vaccine.jpg")
-scanImage("ouid2.jpg")
-scanImage("hack.jpg")
+#scanImage("id.jpg")
+#scanImage("vaccine.jpg")
+#scanImage("ouid2.jpg")
+#scanImage("hack.jpg")
