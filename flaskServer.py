@@ -74,6 +74,13 @@ def adminStatus():
         uid = request.form["id"]
         statusState = request.form["status"]
 
+        if statusState == "true":
+            statusState = True
+        elif statusState == "false":
+            statusState = "false"
+        else:
+            statusState = "false"
+
         changeStatus(uid, statusState)
 
 @app.route('/admin/pending', methods=['GET', 'POST'])
