@@ -8,7 +8,7 @@ import numpy as np
 from pictureScanner import scanImage
 
 def makeNewUser(name, monthDOB, dayDOB, yearDOB, email, phone, dose1name, dose1date, dose2name, dose2date,
-                dose3name, dose3date, username, card, id):
+                dose3name, dose3date, card, id, username):
     hiddenToken = secrets.token_hex(32)
     print(hiddenToken)
 
