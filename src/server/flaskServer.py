@@ -59,9 +59,7 @@ def info():
 def validate():
     if request.method == 'POST':
 
-        frame = request.files['data']
-        frame = base64.b64encode(frame.read())
-        frame = frame.decode('utf-8')
+        frame = request.form['data']
 
         uid = readQRPicture(frame)
 
