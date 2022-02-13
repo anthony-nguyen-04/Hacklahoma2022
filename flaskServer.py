@@ -82,7 +82,9 @@ def pending():
 
         pending = generatePending()
 
-        return pending
+        pendingDict = {"pending" : pending}
+
+        return pendingDict
 
 @app.route('/admin/data', methods=['GET', 'POST'])
 def data():
@@ -105,6 +107,8 @@ def data():
             "cardb64": cardb64,
             "idb64": idb64
         }
+
+        return output
 
 if __name__ == '__main__':
    app.run()
