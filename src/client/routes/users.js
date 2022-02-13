@@ -96,7 +96,8 @@ router.get('/view', function (req, res, next) {
                 userController.setUser(localUser);
                 res.render('pass/rejected');
             } else {
-                res.send('whoops fucko')
+                // in theory, unreachable state
+                res.send('pass not found')
             }
         })
 });
