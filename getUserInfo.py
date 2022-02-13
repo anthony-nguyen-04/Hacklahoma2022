@@ -36,17 +36,22 @@ def userSearch(id):
     #print(data)
 
 def readQRPicture(picture):
-    image = cv2.imread(picture)
-    image = imutils.resize(image, height=1000)
+    #image = cv2.imread(picture)
+    #image = imutils.resize(image, height=1000)
+
+    picture = bytes(picture, 'utf-8')
+    image = base64.decodebytes(picture)
+    #image = np.array(image)
 
     try:
         decoded = pyzbar.decode(image)
-        qrCode = (decoded[0].data).decode('utf-8')
-        foundStatus, userData = userSearch(qrCode)
+        qrCodeID = (decoded[0].data).decode('utf-8')
+        #foundStatus, userData = userSearch(qrCode)
     except:
-        foundStatus, userData = None, -1
+        qrCodeID = -1
+        #foundStatus, userData = None, -1
 
-    return (foundStatus, userData)
+    return qrCodeID
     #print(userData)
 
 def IDtoQR(id):

@@ -2,6 +2,11 @@ from flask import Flask
 from flask import request
 import base64
 from makeNewUser import makeNewUser
+from getUserInfo import userSearch
+from getUserInfo import IDtoQR
+from getUserInfo import readQRPicture
+from validateUserInfo import changeStatus
+from validateUserInfo import generatePending
 
 app = Flask(__name__)
 
@@ -10,7 +15,6 @@ def makeUser():
     if request.method == 'POST':
 
         card = request.files['vaccine-card']
-        print(card)
         card = base64.b64encode(card.read())
         card = card.decode('utf-8')
 
@@ -18,7 +22,7 @@ def makeUser():
         ouid = base64.b64encode(ouid.read())
         ouid = ouid.decode('utf-8')
 
-        uid, username = makeNewUser(request.form['name'], request.form['month'], request.form['day'],
+        uid = makeNewUser(request.form['name'], request.form['month'], request.form['day'],
                                    request.form['year'],
                                    request.form['email'], request.form['phone'], request.form['vaccine-one-type'],
                                    request.form['vaccine-one-date'],
@@ -26,8 +30,67 @@ def makeUser():
                                    request.form['vaccine-three-type'],
                                    request.form['vaccine-three-date'], card, ouid, request.form['username'])
 
-        results = {"id" : uid, "username" : username}
+        results = uid
         return results
+
+@app.route('/user/status', methods=['GET', 'POST'])
+def makeUser():
+    if request.method == 'POST':
+
+        uid = request.form["id"]
+
+        status, _ = userSearch(uid)
+
+        return status
+
+
+@app.route('/user/info', methods=['GET', 'POST'])
+def makeUser():
+    if request.method == 'POST':
+        uid = request.form["id"]
+
+        _, data = userSearch(uid)
+
+        return data
+
+
+@app.route('/user/code', methods=['GET', 'POST'])
+def makeUser():
+    if request.method == 'POST':
+        uid = request.form["id"]
+
+        qrB64 = IDtoQR(uid)
+
+        return qrB64
+
+@app.route('/validator/code', methods=['GET', 'POST'])
+def makeUser():
+    if request.method == 'POST':
+
+        frame = request.files['data']
+        frame = base64.b64encode(frame.read())
+        frame = frame.decode('utf-8')
+
+        uid = readQRPicture(frame)
+
+        return uid
+
+@app.route('/admin/status', methods=['GET', 'POST'])
+def makeUser():
+    if request.method == 'POST':
+
+        uid = request.form["id"]
+        statusState = request.form["status"]
+
+        changeStatus(uid, statusState)
+
+@app.route('/admin/pending', methods=['GET', 'POST'])
+def makeUser():
+    if request.method == 'GET':
+
+        pending = generatePending()
+
+        return pending
 
 
 if __name__ == '__main__':

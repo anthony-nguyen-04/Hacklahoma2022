@@ -60,6 +60,7 @@ def makeNewUser(name, monthDOB, dayDOB, yearDOB, email, phone, dose1name, dose1d
 
     with open(cardFile, 'wb') as f:
         f.write(base64.decodebytes(card))
+
     with open(idFile, 'wb') as f:
         f.write(base64.decodebytes(id))
 
@@ -88,7 +89,7 @@ def makeNewUser(name, monthDOB, dayDOB, yearDOB, email, phone, dose1name, dose1d
         except json.decoder.JSONDecodeError:
             outfile.write(json.dumps(statusDict, indent=4))
 
-    return (hiddenToken, username)
+    return hiddenToken
 
 #card = scanImage("vaccine.jpg")
 #id = scanImage("id.jpg")

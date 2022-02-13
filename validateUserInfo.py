@@ -24,7 +24,6 @@ def sendMessage(id, statusState):
         to=str('+1'+phone)
     )
 
-
 def generatePending():
     with open('users.json', 'r') as openfile:
         # Reading from json file
