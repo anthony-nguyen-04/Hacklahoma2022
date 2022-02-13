@@ -1,0 +1,104 @@
+extends layout 
+
+block content 
+    img(src='/images/banner-logo.png').img-fluid
+    .container-md 
+        h1 Get a vaccine pass 
+        p Thank you for doing your bit to keep your community safe. To issue you a Goklahoma vaccine pass, we'll just need you to enter some information.
+        p You will need: 
+        ol 
+            li Your CDC vaccine card 
+            li Your OU ID 
+            li Pictures of your CDC vaccine card and your OU ID 
+            li A valid email 
+            li A US phone number 
+        p After you submit this form, Goklahoma will verify the information you provided matches that on your vaccine card. Once this verification process is complete, you will be notified via text message that your Goklahoma vaccine pass is ready.
+        form(action='/api/user/info', method='post')
+            .mb-3 
+                label(for='name').form-label Your name 
+                input(type='text', name='name', placeholder='Jane Doe')#name.form-control
+            .mb-3 
+                label(for='email').form-label Your email 
+                input(type='email', name='email', placeholder='jdoe@gmail.com')#email.form-control
+            .mb-3 
+                label(for='phone').form-label Your phone number 
+                input(type='tel', name='phone', placeholder='4051234567', pattern='[0-9]{10}')#phone.form-control
+            label(for='dob').form-label Date of birth
+            .mb-3.input-group 
+                select(name='month').form-select#month
+                    option(value='01', selected) January 
+                    option(value='02') February 
+                    option(value='03') March 
+                    option(value='04') April 
+                    option(value='05') May 
+                    option(value='06') June 
+                    option(value='07') July 
+                    option(value='08') August 
+                    option(value='09') September 
+                    option(value='10') October 
+                    option(value='11') November 
+                    option(value='12') December 
+                input(type='text', name='day', pattern='[0-9][0-9]', placeholder='01').form-control#day
+                span.input-group-text ,
+                input(type='text', name='year', pattern='[0-9]{4}', placeholder='1970').form-control#year
+            .row.g-3 
+                .col 
+                    label(for='vaccine-one-type') Dose 1 Manufacturer #[small (N/A if not received)]
+                    select(name='vaccine-one-type').form-select#vaccine-one-type
+                        option(value='none') N/A
+                        option(value='novavax') Novavax 
+                        option(value='covovax') Covovax 
+                        option(value='moderna') Moderna 
+                        option(value='pfizer') Pfizer/BioNTech
+                        option(value='janssen') Janssen (Johnson &amp; Johnson)
+                        option(value='astrazeneca') Oxford/AstraZeneca
+                        option(value='covishield') Covishield 
+                        option(value='covaxin') Covaxin 
+                        option(value='sinopharm') Sinopharm-Covilo 
+                        option(value='sinovac') Sinovac
+                .col 
+                    label(for='vaccine-one-date') Dose 1 Date #[small (leave blank if not received)]
+                    input(type='text', name='vaccine-one-date', pattern='[0-9]{2}/[0-9]{2}/[0-9]{4}', placeholder='01/01/2020').form-control#vaccine-one-date
+            .row.g-3 
+                .col 
+                    label(for='vaccine-two-type') Dose 2 Manufacturer #[small (N/A if not received)]
+                    select(name='vaccine-two-type').form-select#vaccine-two-type
+                        option(value='none') N/A
+                        option(value='novavax') Novavax 
+                        option(value='covovax') Covovax 
+                        option(value='moderna') Moderna 
+                        option(value='pfizer') Pfizer/BioNTech
+                        option(value='janssen') Janssen (Johnson &amp; Johnson)
+                        option(value='astrazeneca') Oxford/AstraZeneca
+                        option(value='covishield') Covishield 
+                        option(value='covaxin') Covaxin 
+                        option(value='sinopharm') Sinopharm-Covilo 
+                        option(value='sinovac') Sinovac
+                .col 
+                    label(for='vaccine-two-date') Dose 2 Date #[small (leave blank if not received)]
+                    input(type='text', name='vaccine-two-date', pattern='[0-9]{2}/[0-9]{2}/[0-9]{4}', placeholder='01/01/2020').form-control#vaccine-two-date
+            .row.g-3 
+                .col 
+                    label(for='vaccine-three-type') Dose 3 Manufacturer #[small (N/A if not received)]
+                    select(name='vaccine-three-type').form-select#vaccine-three-type
+                        option(value='none') N/A
+                        option(value='novavax') Novavax 
+                        option(value='covovax') Covovax 
+                        option(value='moderna') Moderna 
+                        option(value='pfizer') Pfizer/BioNTech
+                        option(value='janssen') Janssen (Johnson &amp; Johnson)
+                        option(value='astrazeneca') Oxford/AstraZeneca
+                        option(value='covishield') Covishield 
+                        option(value='covaxin') Covaxin 
+                        option(value='sinopharm') Sinopharm-Covilo 
+                        option(value='sinovac') Sinovac
+                .col 
+                    label(for='vaccine-three-date') Dose 3 Date #[small (leave blank if not received)]
+                    input(type='text', name='vaccine-three-date', pattern='[0-9]{2}/[0-9]{2}/[0-9]{4}', placeholder='01/01/2020').form-control#vaccine-three-date
+            .mb-3 
+                label(for='vaccine-card') Picture of your CDC vaccine card 
+                input(type='file', name='vaccine-card').form-control#vaccine-card
+            .mb-3 
+                label(for='ou-id') Picture of your OU ID card 
+                input(type='file', name='ou-id').form-control#ou-id
+            input(type='submit', value='Submit form').btn.btn-outline-success

@@ -7,8 +7,12 @@ block content
       .col
       .col.align-self-center 
         .list-group
-          a(href='/pass/new').list-group-item.list-group-item-success.text-center Get a new pass 
-          a(href='/pass/view').list-group-item.list-group-item-primary.text-center View existing pass 
-          a(href='/validator').list-group-item.list-group-item-secondary.text-center Validate passes 
-          a(href='/admin').list-group-item.list-group-item-secondary.text-center Administrator view
+          if localUser.info.permissions.includes('user') && !(localUser.info.hasPass)
+            a(href='/pass/new').list-group-item.list-group-item-success.text-center Get a new pass 
+          if localUser.info.permissions.includes('user') && localUser.info.hasPass  
+            a(href='/pass/view').list-group-item.list-group-item-primary.text-center View existing pass 
+          if localUser.info.permissions.includes('validator')
+            a(href='/validator').list-group-item.list-group-item-secondary.text-center Validate passes
+          if localUser.info.permissions.includes('admin') 
+            a(href='/admin').list-group-item.list-group-item-secondary.text-center Administrator view
       .col

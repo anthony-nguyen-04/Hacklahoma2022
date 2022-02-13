@@ -48,24 +48,19 @@ app.use(function (req, res, next) {
             userController.addUser(res.locals.user.name);
         }
         const localUser = userController.getUser(res.locals.user.name);
-        if ('info' in localUser) {
-            res.locals.user.info = localUser.info
-        } else {
-            localUser.info = {
-                permissions: ['user'],
-                hasPass: false
-            };
-            userController.setUser(localUser)
-        }
     }
     next();
 })
 
 // req.isAuthenticated is provided from the auth router
 app.get('/', (req, res) => {
-    if (req.oidc.isAuthenticated()) return res.render('index');
+    if (req.oidc.isAuthenticated()) return res.render('index', { localUser: userController.getUser(res.locals.user.name) });
     res.render('login');
 });
+
+app.post('/api/user/info', (req, res) => {
+    res.send(JSON.stringify(req.body))
+})
 
 app.use('/stylesheets/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/javascripts/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/js'))

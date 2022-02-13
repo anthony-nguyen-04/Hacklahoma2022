@@ -32,11 +32,11 @@ userController.saveUsers = function (userList) {
 
 userController.userExists = function (username) {
     const users = userController.getUsers();
-    return 'username' in users;
+    return username in users;
 }
 
 userController.addUser = function (username) {
-    userController.setUser({ username: username })
+    userController.setUser({ username: username, info: { permissions: ["user"], hasPass: false } })
 }
 
 module.exports = userController;
