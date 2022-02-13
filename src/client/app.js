@@ -22,10 +22,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/pass', usersRouter);
-app.use('/validator', validatorRouter);
-app.use('/admin', adminRouter);
-
 const { auth } = require('express-openid-connect');
 
 const config = {
@@ -64,6 +60,11 @@ app.post('/api/user/info', (req, res) => {
 
 app.use('/stylesheets/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use('/javascripts/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/js'))
+app.use('/stylesheets/bootstrap-icons', express.static(__dirname + '/node_modules/bootstrap-icons/font'))
+
+app.use('/pass', usersRouter);
+app.use('/validator', validatorRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,9 @@
+extends ../layout 
+
+block content 
+    .d-flex.justify-content-center.mb-3
+        div(style='width: 3rem; height: 3rem;').spinner-border.text-primary
+    div(style='max-width: 500px;').container-md.mx-auto.d-block
+        h1 Your Goklahoma vaccine pass will be ready soon.
+        p We have received your data and will shortly begin verifying the information you provided against the data given on your CDC vaccine card. You'll be notified when this process is completed.
+        p.text-secondary #{name} will be contacted via text message at #{phone} with any updates.
