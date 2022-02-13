@@ -28,8 +28,30 @@ router.get('/verify/:id', function (req, res, next) {
     })
         .then(response => response.json())
         .then(json => {
-            res.render('admin/verify', { vaccineCard: json.cardb64, idCard: json.idb64, info: json.info })
+            res.render('admin/verify', { vaccineCard: json.cardb64, idCard: json.idb64, info: json.info, id: req.params.id })
         });
+});
+
+router.get('/verify/success/:id', function (req, res, next) {
+    const form = new FormData();
+    form.append('id', req.params.id);
+    form.append('status', 'true');
+    fetch('http://localhost:5000/admin/status', {
+        method: 'POST',
+        body: form
+    });
+    res.redirect('/admin');
+});
+
+router.get('/verify/failure/:id', function (req, res, next) {
+    const form = new FormData();
+    form.append('id', req.params.id);
+    form.append('status', 'false');
+    fetch('http://localhost:5000/admin/status', {
+        method: 'POST',
+        body: form
+    });
+    res.redirect('/admin');
 });
 
 module.exports = router;

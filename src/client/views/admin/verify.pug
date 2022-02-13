@@ -4,14 +4,14 @@ block content
     h1 Verify information accuracy
     .container 
         row.row-cols-2 
-            .vaccine-card 
-                img(src=vaccineCard).img-fluid
-            .id-card 
-                img(src=idCard)
+            .container.vaccine-card 
+                img(src='data:image/jpg;base64,'+vaccineCard).img-fluid
+            .container.id-card 
+                img(src='data:image/jpg;base64,'+idCard).img-fluid
             .info 
                 ul.list-group 
                     li.list-group-item Name: #{info.name}
-                    li.list-group-item DOB: #{info.dob}
+                    li.list-group-item DOB: #{info.DOB}
                     li.list-group-item Dose 1 Type: #{info['vaccine-one-type']}
                     li.list-group-item Dose 1 Date: #{info['vaccine-one-date']}
                     li.list-group-item Dose 2 Type: #{info['vaccine-two-type']}
