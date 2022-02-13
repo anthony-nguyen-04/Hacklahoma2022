@@ -37,7 +37,7 @@ def makeUser():
 
 
 @app.route('/user/info', methods=['GET', 'POST'])
-def makeUser():
+def info():
     if request.method == 'POST':
         uid = request.form["id"]
 
@@ -55,7 +55,7 @@ def makeUser():
 
 
 @app.route('/validator/code', methods=['GET', 'POST'])
-def makeUser():
+def validate():
     if request.method == 'POST':
 
         frame = request.files['data']
@@ -67,7 +67,7 @@ def makeUser():
         return uid
 
 @app.route('/admin/status', methods=['GET', 'POST'])
-def makeUser():
+def adminStatus():
     if request.method == 'POST':
 
         uid = request.form["id"]
@@ -76,7 +76,7 @@ def makeUser():
         changeStatus(uid, statusState)
 
 @app.route('/admin/pending', methods=['GET', 'POST'])
-def makeUser():
+def pending():
     if request.method == 'GET':
 
         pending = generatePending()
