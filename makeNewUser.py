@@ -34,20 +34,29 @@ def makeNewUser(name, monthDOB, dayDOB, yearDOB, email, phone, dose1name, dose1m
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
+    if not os.path.exists("%s/users" % (dir_path)):
+        os.mkdir("%s/users" % (dir_path))
+
     if not os.path.exists("%s/users/%s" % (dir_path, hiddenToken)):
-        #os.mkdir("%s/users" % (dir_path))
         os.mkdir("%s/users/%s" % (dir_path, hiddenToken))
 
     cv2.imwrite("%s\\users\\%s\\card.jpg" % (dir_path, hiddenToken), card)
     cv2.imwrite("%s\\users\\%s\\id.jpg" % (dir_path, hiddenToken), id)
-    qr.png("%s\\users\\%s\\qr.png" % (dir_path, hiddenToken), scale=6)
+    qr.png("%s\\users\\%s\\qr.png" % (dir_path, hiddenToken), scale=8)
 
     # Serializing json
     json_object = json.dumps(userDict, indent=4)
 
-    # Writing to sample.json
-    with open("users.json", "a") as outfile:
-        outfile.write(json_object)
+    # Writing to users.json
+    with open("users.json", "r+") as outfile:
+        #outfile.write(json_object)
+        try:
+            data = json.load(outfile)
+            data.update(userDict)
+            outfile.seek(0)
+            json.dump(data, outfile, indent=4)
+        except json.decoder.JSONDecodeError:
+            outfile.write(json_object)
 
 card = scanImage("vaccine.jpg")
 id = scanImage("id.jpg")

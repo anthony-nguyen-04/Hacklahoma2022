@@ -25,4 +25,5 @@ def readQRPicture(picture):
     return userData
     #print(userData)
 
-#print(readQRPicture("qrtest.jpg"))
+#print(readQRPicture("qr4eb.jpg"))
+#print(readQRPicture("qrb3c.jpg"))
