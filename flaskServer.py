@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import request
 import base64
+import os
 from makeNewUser import makeNewUser
 from getUserInfo import userSearch
 from getUserInfo import IDtoQR
@@ -83,6 +84,27 @@ def pending():
 
         return pending
 
+@app.route('/admin/data', methods=['GET', 'POST'])
+def data():
+    if request.method == 'POST':
+        uid = request.form["id"]
+
+        status, data = userSearch(uid)
+
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+
+        with open("%s\\users\\%s\\card.jpg" % (dir_path, uid), "rb") as img_file:
+            cardb64 = base64.b64encode(img_file.read())
+
+        with open("%s\\users\\%s\\id.jpg" % (dir_path, uid), "rb") as img_file:
+            idb64 = base64.b64encode(img_file.read())
+
+        output = {
+            "status": status,
+            "info": data,
+            "cardb64": cardb64,
+            "idb64": idb64
+        }
 
 if __name__ == '__main__':
    app.run()
