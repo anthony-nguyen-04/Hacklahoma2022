@@ -3,8 +3,8 @@ import json
 import cv2
 import os
 import pyqrcode
-import png
-from pyqrcode import QRCode
+import base64
+import numpy as np
 from pictureScanner import scanImage
 
 
@@ -49,8 +49,25 @@ def makeNewUser(name, monthDOB, dayDOB, yearDOB, email, phone, dose1name, dose1d
     if not os.path.exists("%s/users/%s" % (dir_path, hiddenToken)):
         os.mkdir("%s/users/%s" % (dir_path, hiddenToken))
 
-    cv2.imwrite("%s\\users\\%s\\card.jpg" % (dir_path, hiddenToken), card)
-    cv2.imwrite("%s\\users\\%s\\id.jpg" % (dir_path, hiddenToken), id)
+
+    card = bytes(card, 'utf-8')
+    id = bytes(id, 'utf-8')
+
+    #card = base64.b64decode(card)
+    #id = base64.b64decode(id)
+
+    cardFile = "%s\\users\\%s\\card.jpg" % (dir_path, hiddenToken)
+    idFile = "%s\\users\\%s\\id.jpg" % (dir_path, hiddenToken)
+
+    with open(cardFile, 'wb') as f:
+        f.write(base64.decodebytes(card))
+    with open(idFile, 'wb') as f:
+        f.write(base64.decodebytes(id))
+
+
+
+    #cv2.imwrite("%s\\users\\%s\\card.jpg" % (dir_path, hiddenToken), card)
+    #cv2.imwrite("%s\\users\\%s\\id.jpg" % (dir_path, hiddenToken), id)
     qr.png("%s\\users\\%s\\qr.png" % (dir_path, hiddenToken), scale=8)
 
     # Writing to users.json
@@ -77,7 +94,20 @@ def makeNewUser(name, monthDOB, dayDOB, yearDOB, email, phone, dose1name, dose1d
 card = scanImage("vaccine.jpg")
 id = scanImage("id.jpg")
 
+
+#cardTest = base64.b64encode(cv2.imread("vaccine.jpg"))
+#cardTest = cardTest.decode('utf-8')
+
+#cardTest = base64.encodebytes(open("vaccine.jpg","rb").read())
+#cardTest = cardTest.decode("utf-8")
+
+#idTest = base64.encodebytes(open("id.jpg","rb").read())
+#idTest = idTest.decode("utf-8")
+
+#print(cardTest)
+#print(idTest)
+
 token, name = makeNewUser("Anthony Nguyen", 11, 18, 2004, "anthonynguyenlaas@gmail.com", "5802917814", "Pfizer", "03/19/2021",
-                          "Pfizer", "04/09/2021", "N/A", "N/A", "anthonynguyenlaas@gmail.com", card, id)
+                          "Pfizer", "04/09/2021", "N/A", "N/A", "anthonynguyenlaas@gmail.com", cardTest, idTest)
 
 #print(token)
