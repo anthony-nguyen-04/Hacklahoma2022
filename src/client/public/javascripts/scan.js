@@ -1,3 +1,6 @@
+// following the tutorial here:
+// https://developer.mozilla.org/en-US/docs/Web/API/WebRTC_API/Taking_still_photos
+
 (function() {
     // The width and height of the captured photo. We will set the
     // width to the value defined here, but the height will be

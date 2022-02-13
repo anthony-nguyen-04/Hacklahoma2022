@@ -69,7 +69,6 @@ router.get('/view', function (req, res, next) {
     fetch('http://localhost:5000/user/info', { method: 'POST', body: form })
         .then(response => response.json())
         .then(json => {
-            console.log(JSON.stringify(json))
             if (json.status === 'PENDING') {
                 res.render('pass/pending', { name: json.info.name, phone: json.info.phone });
             } else if (json.status === 'VALID') {
