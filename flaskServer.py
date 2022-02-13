@@ -1,16 +1,29 @@
 from flask import Flask
 from flask import request
+import base64
 from makeNewUser import makeNewUser
 
 app = Flask(__name__)
 
-@app.route('/user/new', methods='POST')
+@app.route('/user/new', methods=['GET', 'POST'])
 def makeUser():
     if request.method == 'POST':
-        id, username = makeNewUser(request.form['name'], request.form['month'], request.form['day'], request.form['year'],
-                        request.form['email'], request.form['phone'], request.form['vaccine-one-type'], request.form['vaccine-one-date'],
-                        request.form['vaccine-two-type'], request.form['vaccine-two-date'], request.form['vaccine-three-type'],
-                        request.form['vaccine-three-date'], request.form['vaccine-card'], request.form['ou-id'], request.form['username'])
+
+        card = request.files['vaccine-card']
+        card = base64.b64encode(card.read())
+        card = card.decode('utf-8')
+
+        id = request.files['ou-id']
+        id = base64.b64encoide(id.read())
+        id = id.decode('utf-8')
+
+        id, username = makeNewUser(request.form['name'], request.form['month'], request.form['day'],
+                                   request.form['year'],
+                                   request.form['email'], request.form['phone'], request.form['vaccine-one-type'],
+                                   request.form['vaccine-one-date'],
+                                   request.form['vaccine-two-type'], request.form['vaccine-two-date'],
+                                   request.form['vaccine-three-type'],
+                                   request.form['vaccine-three-date'], card, id, request.form['username'])
 
         results = {"id" : id, "username" : username}
         return results
