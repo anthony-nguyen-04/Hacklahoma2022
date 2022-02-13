@@ -106,7 +106,8 @@ def scanImage(pictureName):
 		return warped
 
 	except UnboundLocalError:
-		print("unable to scan properly. please try again")
+		print("did not scan properly")
+		return imutils.resize(image, height = 650)
 
 #scanImage("id.jpg")
 #scanImage("vaccine.jpg")
