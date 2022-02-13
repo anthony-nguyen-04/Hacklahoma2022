@@ -41,6 +41,11 @@ def readQRPicture(picture):
 
     picture = bytes(picture, 'utf-8')
     image = base64.decodebytes(picture)
+
+    with open("imageToSave.png", "wb") as fh:
+        fh.write(image)
+
+    image = cv2.imread("imageToSave.png")
     #image = np.array(image)
 
     try:
@@ -50,6 +55,8 @@ def readQRPicture(picture):
     except:
         qrCodeID = -1
         #foundStatus, userData = None, -1
+
+    os.remove("imageToSave.png")
 
     return qrCodeID
     #print(userData)
@@ -64,4 +71,3 @@ def IDtoQR(id):
         my_string = my_string.decode('utf-8')
 
     return my_string
-

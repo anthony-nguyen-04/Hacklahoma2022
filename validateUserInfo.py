@@ -29,9 +29,13 @@ def generatePending():
         # Reading from json file
         userDict = json.load(openfile)
 
-    pendingDict = userDict.get("PENDING")
+    pendingDict = userDict.get("PENDING", -1)
 
-    pendingList = list(pendingDict.keys())
+    try:
+        pendingList = list(pendingDict.keys())
+    except:
+        pendingList = []
+
     return pendingList
 
 def changeStatus(id, statusState):
