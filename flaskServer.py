@@ -77,9 +77,9 @@ def adminStatus():
         if statusState == "true":
             statusState = True
         elif statusState == "false":
-            statusState = "false"
+            statusState = False
         else:
-            statusState = "false"
+            statusState = False
 
         changeStatus(uid, statusState)
 
