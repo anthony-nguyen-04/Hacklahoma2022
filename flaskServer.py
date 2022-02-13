@@ -33,15 +33,7 @@ def makeUser():
         results = uid
         return results
 
-@app.route('/user/status', methods=['GET', 'POST'])
-def makeUser():
-    if request.method == 'POST':
 
-        uid = request.form["id"]
-
-        status, _ = userSearch(uid)
-
-        return status
 
 
 @app.route('/user/info', methods=['GET', 'POST'])
@@ -49,9 +41,14 @@ def makeUser():
     if request.method == 'POST':
         uid = request.form["id"]
 
-        _, data = userSearch(uid)
+        status, data = userSearch(uid)
 
-        return data
+        output = {
+            "status" : status,
+            "info" : data
+        }
+
+        return output
 
 
 @app.route('/user/code', methods=['GET', 'POST'])
