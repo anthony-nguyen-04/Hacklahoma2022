@@ -91,8 +91,8 @@ def makeNewUser(name, monthDOB, dayDOB, yearDOB, email, phone, dose1name, dose1d
 
     return (hiddenToken, username)
 
-card = scanImage("vaccine.jpg")
-id = scanImage("id.jpg")
+#card = scanImage("vaccine.jpg")
+#id = scanImage("id.jpg")
 
 
 #cardTest = base64.b64encode(cv2.imread("vaccine.jpg"))
@@ -107,7 +107,7 @@ id = scanImage("id.jpg")
 #print(cardTest)
 #print(idTest)
 
-token, name = makeNewUser("Anthony Nguyen", 11, 18, 2004, "anthonynguyenlaas@gmail.com", "5802917814", "Pfizer", "03/19/2021",
+#token, name = makeNewUser("Anthony Nguyen", 11, 18, 2004, "anthonynguyenlaas@gmail.com", "5802917814", "Pfizer", "03/19/2021",
                           "Pfizer", "04/09/2021", "N/A", "N/A", "anthonynguyenlaas@gmail.com", cardTest, idTest)
 
 #print(token)
