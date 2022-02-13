@@ -98,8 +98,12 @@ def data():
         with open("%s\\users\\%s\\card.jpg" % (dir_path, uid), "rb") as img_file:
             cardb64 = base64.b64encode(img_file.read())
 
+        cardb64 = cardb64.decode('utf-8')
+
         with open("%s\\users\\%s\\id.jpg" % (dir_path, uid), "rb") as img_file:
             idb64 = base64.b64encode(img_file.read())
+
+        idb64 = idb64.decode('utf-8')
 
         output = {
             "status": status,
